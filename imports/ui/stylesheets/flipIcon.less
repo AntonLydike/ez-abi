@@ -1,0 +1,59 @@
+.flip-icon {
+  position: relative;
+
+  .icon, .icon-bg {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;
+  height:3rem;
+  width:3rem;
+  position:absolute;
+  left:.75rem;
+  padding-top: .5rem;
+  color:white;
+  cursor:default;
+  font-size:1.5rem;
+  font-weight:300;
+  text-align:center;
+  transition:.3s;
+  backface-visibility:hidden;
+}
+.icon-bg {
+  transform:rotateY(180deg);
+  padding:.5rem;
+
+  .material-icons {
+    font-size:2rem;
+    transform:scale(.2);
+    opacity:0;
+    transition:.3s;
+    transition-delay:0s;
+    backface-visibility: hidden;
+  }
+}
+
+&.flipable {
+  .icon, .icon-bg {
+    cursor:pointer;
+  }
+}
+
+&.selected {
+    .icon {
+      transform:rotateY(180deg);
+    }
+    .icon-bg {
+      transform:rotateY(0deg);
+
+      i {
+        transform:scale(1);
+        opacity:1;
+        transition-delay:.13s;
+      }
+    }
+  }
+}

@@ -2,21 +2,20 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Paragraphs } from './paragraphs.js';
 import { Documents } from '/imports/api/documents/documents.js';
+import { Subjcts } from '/imports/api/subjects/subjects.js';
 
 Meteor.methods({
-  'paragraphs.insert'(title, text, doc) {
-    check(text, String);
+  'topics.insert'(title, subject) {
+    check(subject, String);
     check(title, String);
-    check(doc, String);
 
-    if (Documents.findOne(doc) === undefined) {
-      throw "The referenced document does not exist!";
+    if (Subjcts.findOne(subject) === undefined) {
+      throw "You have to supply a valid subject"
     }
 
-    return Links.insert({
-      text,
+    return Documents.insert({
+      color,
       title,
       createdAt: new Date(),
     });

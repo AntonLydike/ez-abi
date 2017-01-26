@@ -1,0 +1,14 @@
+h1 {{title}}
+  //- TODO add chapters n stuff
+.list.chapters
+  if Template.subscriptionsReady
+    each subjects
+      a(href="{{pathFor 'document.view' _id='553W'}}")
+        +document
+    else
+      .message 
+        .title No documents there yet!
+  else
+    +app_loading
+    
+a.btn.right.waves-effect.waves-light(href="{{pathFor 'subjects.add'}}") create document

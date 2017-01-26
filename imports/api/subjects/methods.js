@@ -2,16 +2,18 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Documents } from './documents.js';
+import { Subjects } from './subjects.js';
 
 Meteor.methods({
-  'documents.insert'(title, color) {
+  'subjects.insert'(title, color) {
     check(color, String);
     check(title, String);
 
-    return Documents.insert({
+    return Subjects.insert({
       color,
       title,
+      docCount: 0,
+      subjCount: 0,
       createdAt: new Date(),
     });
   },

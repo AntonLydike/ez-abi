@@ -1,0 +1,110 @@
+@bc: #aaa;
+
+.list {
+  margin: 8px 0;
+
+  &.bordered {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+    .list-item:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
+  }
+
+  &.w-icon {
+    .list-item {
+      padding: 8px 16px 8px 74px;
+      position: relative;
+
+      .flip-icon {
+        position: absolute;
+        left: 4px;
+        top: 11px;
+      }
+    }
+  }
+
+  &.chapters {
+      .chapter {
+        position: relative;
+        padding-left: 32px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          border-left: 1px solid @bc;
+          left: 16px;
+          top: 29px;
+          bottom: 0px;
+        }
+
+        .head {
+          display: flex;
+
+          &:before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: 10px;
+            height: 9px;
+            width: 9px;
+            background: @bc;
+            border-radius: 50%;
+          }
+
+          .title {
+            font-size: 2em;
+          }
+
+          .line {
+              margin: 14px 16px 0 16px;
+              height: 1px;
+              flex-basis: 10px;
+              min-width: 10px;
+              background: @bc;
+              flex-grow: 1;
+              display: block;
+          }
+
+          .date {
+            font-size: 2em;
+          }
+        }
+      }
+    }
+
+  & > a {
+    color: inherit;
+
+    & > .list-item {
+      transition: background .3s;
+    }
+
+    &:hover > .list-item {
+      background: rgba(0,0,0,0.06);
+    }
+  }
+
+  .list-item {
+    padding: 8px 16px;
+    .title {
+      font-size:1.3rem;
+    }
+
+    .sub {
+      opacity:.8;
+      font-weight:500;
+    }
+
+    .count {
+      float:right;
+      opacity:.4;
+      font-size:1.64rem;
+      padding-top:.55rem;
+      &:before  {
+        content:'#';
+      }
+    }
+  }
+}
