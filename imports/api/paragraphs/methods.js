@@ -11,7 +11,9 @@ Meteor.methods({
     check(title, String);
     check(doc, String);
 
-    if ()
+    if (Documents.findOne(doc) == undefined) {
+      // do something!
+    }
 
     return Links.insert({
       text,
