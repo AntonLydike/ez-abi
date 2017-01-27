@@ -1,0 +1,12 @@
+h1 Classes
+.list.w-icon.bordered
+  if Template.subscriptionsReady
+    each classes
+      +class_item
+    else
+      .message 
+        .title No Classes there yet!
+  else
+    +app_loading
+    
+a.btn.right.waves-effect.waves-light(href="{{pathFor 'classes.add'}}") Add class

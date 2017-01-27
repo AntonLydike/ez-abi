@@ -74,14 +74,12 @@
       }
     }
 
-  & > a {
+  a.list-item {
+    display: block;
     color: inherit;
+    transition: background .3s;
 
-    & > .list-item {
-      transition: background .3s;
-    }
-
-    &:hover > .list-item {
+    &:hover {
       background: rgba(0,0,0,0.06);
     }
   }

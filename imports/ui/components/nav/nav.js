@@ -1,9 +1,9 @@
 import './nav.html';
 import { Template } from 'meteor/templating';
-import { Subjects } from '/imports/api/subjects/subjects.js';
+import { Classes } from '/imports/api/classes/classes.js';
 
 Template.app_nav.onCreated(function () {
-  this.subscribe('subjects.all');
+  this.subscribe('classes.all');
 })
 
 Template.app_nav.onRendered(() => {
@@ -11,7 +11,7 @@ Template.app_nav.onRendered(() => {
 })
 
 Template.app_nav.helpers({
-  subjects() {
-    return Subjects.find();
+  classes() {
+    return Classes.find();
   }
 })

@@ -5,8 +5,9 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
-import '../../ui/pages/subjects/list/list.js';
-import '../../ui/pages/subjects/add/add.js';
+import '../../ui/pages/classes/list/list.js';
+import '../../ui/pages/classes/add/add.js';
+import '../../ui/pages/classes/view/view.js';
 import '../../ui/components/nav/nav.js';
 import '../../ui/components/loading/loading.js';
 
@@ -18,17 +19,24 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/subjects', {
-  name: 'subjects.list',
+FlowRouter.route('/classes', {
+  name: 'classes.list',
   action() {
-    BlazeLayout.render('App_body', { main: 'subjects_list' });
+    BlazeLayout.render('App_body', { main: 'classes_list' });
   },
 });
 
-FlowRouter.route('/subjects/add', {
-  name: 'subjects.add',
+FlowRouter.route('/classes/add', {
+  name: 'classes.add',
   action() {
-    BlazeLayout.render('App_body', { main: 'subjects_add' });
+    BlazeLayout.render('App_body', { main: 'classes_add' });
+  },
+});
+
+FlowRouter.route('/classes/s/:title', {
+  name: 'classes.view',
+  action(param) {
+    BlazeLayout.render('App_body', { main: 'classes_view' });
   },
 });
 

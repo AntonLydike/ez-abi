@@ -2,14 +2,14 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Subjects } from './subjects.js';
+import { Classes } from './classes.js';
 
 Meteor.methods({
-  'subjects.insert'(title, color) {
+  'classes.insert'(title, color) {
     check(color, String);
     check(title, String);
 
-    return Subjects.insert({
+    return Classes.insert({
       color,
       title,
       docCount: 0,

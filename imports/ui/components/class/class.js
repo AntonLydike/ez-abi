@@ -1,8 +1,8 @@
-import './subject.tpl.jade';
+import './class_item.tpl.jade';
 import '../flip-icon/flipIcon.js';
 
 
-Template.subject.helpers({
+Template.class_item.helpers({
   icon() {
     return {
       name: this.title,

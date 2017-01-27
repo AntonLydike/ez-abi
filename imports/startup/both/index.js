@@ -4,4 +4,4 @@
 
 import { Documents } from '/imports/api/documents/documents.js';
 import { Paragraphs } from '/imports/api/paragraphs/paragraphs.js';
-import { Subjects } from '/imports/api/subjects/subjects.js';
+import { Classes } from '/imports/api/classes/classes.js';

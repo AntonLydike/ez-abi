@@ -5,13 +5,13 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
       <ul class="right hide-on-med-and-down">
-        <li><a href="{{pathFor 'subjects.list'}}">My Subjects</a></li>
+        <li><a href="{{pathFor 'classes.list'}}">My Classes</a></li>
       </ul>
 
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="{{pathFor 'subjects.list'}}">My Subjects</a>
+        <li><a href="{{pathFor 'classes.list'}}">My Classes</a>
           <ul>
-            {{# each subjects}}
+            {{# each classes}}
               <li><a>{{title}}</a></li>
             {{/each}}
           </ul>

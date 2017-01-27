@@ -3,7 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Documents } from '/imports/api/documents/documents.js';
-import { Subjcts } from '/imports/api/subjects/subjects.js';
+import { Subjcts } from '/imports/api/classes/classes.js';
 
 Meteor.methods({
   'topics.insert'(title, subject) {
