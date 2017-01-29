@@ -8,8 +8,8 @@ Meteor.publish('topics.all', function () {
   return Topics.find();
 });
 
-Meteor.publish('topics.subject', function (title) {
-  check(title, String);
+Meteor.publish('topics.class', function (class_id) {
+  check(class_id, String);
 
-  return Topics.find({title});
+  return Topics.find({class_id});
 });

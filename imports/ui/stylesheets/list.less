@@ -1,5 +1,3 @@
-@bc: #aaa;
-
 .list {
   margin: 8px 0;
 
@@ -25,54 +23,119 @@
     }
   }
 
-  &.chapters {
-      .chapter {
-        position: relative;
-        padding-left: 32px;
+  &.doc-list .list-item {
+    padding-left: 56px;
+    position: relative;
 
-        &:before {
-          content: "";
-          position: absolute;
-          border-left: 1px solid @bc;
-          left: 16px;
-          top: 29px;
-          bottom: 0px;
+    &:not(.no-doc):before {
+      .material-icons(2em);
+      content:"insert_drive_file";
+      position: absolute;
+      left: 8px;
+      top: 18px;
+      opacity: .6;
+    }
+  }
+
+  &.chapters {
+    .chapter {
+      position: relative;
+      padding-left: 32px;
+      overflow: hidden;
+
+      &:before {
+        content: "";
+        position: absolute;
+        border-left: 1px solid @chapter-line-grey;
+        left: 16px;
+        top: 56px;
+        bottom: 0px;
+        opacity: 0;
+        transition: .3s;
+      }
+
+      .doc-add {
+        transform: translateX(-60px);
+      }
+
+      &:hover {
+        .head .material-icons{
+          color: @chapter-highlight;
         }
 
-        .head {
-          display: flex;
+        &:before {
+          border-color: @chapter-highlight;
+        }
+      }
 
-          &:before {
-            content: "";
-            position: absolute;
-            left: 12px;
-            top: 10px;
-            height: 9px;
-            width: 9px;
-            background: @bc;
-            border-radius: 50%;
+      &.t-open {
+        .icon-toggle i {
+          opacity: 1;
+          &:last-child {
+            opacity: 0;
           }
+        }
 
-          .title {
-            font-size: 2em;
-          }
+        &:before {
+          opacity: 1;
+        }
+      }
+
+
+      .head {
+        font-weight: 300;
+        margin: 8px 0;
+        cursor:pointer;
+        display: flex;
+
+        .icon-toggle i {
+          transition: .3s;
+        }
+
+        .material-icons {
+          position: absolute;
+          left: 5px;
+          top: 18px;
+          height: 9px;
+          width: 9px;
+          color:@chapter-line-grey;
+        }
+
+
+        .title {
+          font-size: 2em;
+        }
+        .line {
+            margin: 24px 16px 0 16px;
+            height: 1px;
+            flex-basis: 10px;
+            min-width: 10px;
+            background: @chapter-line-grey;
+            flex-grow: 1;
+            display: block;
+        }
+
+        .date {
+          font-size: 2em;
+        }
+
+        @media (max-width: 600px) {
+          flex-direction: column;
 
           .line {
-              margin: 14px 16px 0 16px;
-              height: 1px;
-              flex-basis: 10px;
-              min-width: 10px;
-              background: @bc;
-              flex-grow: 1;
-              display: block;
+            display: none;
           }
 
           .date {
-            font-size: 2em;
+            font-size: .8em;
+            opacity: .6;
+            font-weight: 500;
+            margin-top: -8px;
           }
         }
       }
     }
+  }
 
   a.list-item {
     display: block;

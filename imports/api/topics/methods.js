@@ -2,21 +2,22 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Documents } from '/imports/api/documents/documents.js';
-import { Subjcts } from '/imports/api/classes/classes.js';
+import { Topics } from './topics.js';
+import { Classes } from '/imports/api/classes/classes.js';
+
 
 Meteor.methods({
-  'topics.insert'(title, subject) {
-    check(subject, String);
+  'topics.insert'(title, class_id) {
+    check(class_id, String);
     check(title, String);
 
-    if (Subjcts.findOne(subject) === undefined) {
-      throw "You have to supply a valid subject"
+    if (Classes.findOne(class_id) === undefined) {
+      throw "You have to supply a valid class id";
     }
 
-    return Documents.insert({
-      color,
+    return Topics.insert({
       title,
+      class_id,
       createdAt: new Date(),
     });
   },

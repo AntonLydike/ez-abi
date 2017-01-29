@@ -32,6 +32,7 @@ accounts-ui
 accounts-password
 useraccounts:materialize
 useraccounts:flow-routing
-zodiase:material-design-icons-fonts
 mquandalle:jade
 arillo:flow-router-helpers
+momentjs:moment
+noorderstorm:jquery.transit

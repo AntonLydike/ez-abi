@@ -1,5 +1,5 @@
 import './classes_list.tpl.jade';
-import '/imports/ui/components/class/class.js';
+import '/imports/ui/components/class_item/class.js';
 
 import { Classes } from '/imports/api/classes/classes.js';
 

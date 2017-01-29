@@ -1,0 +1,19 @@
+.chapter(class="{{open_class}}")
+  .head
+    .icon-toggle.t-open
+      i.material-icons label_outline
+      i.material-icons label
+    .title {{title}}
+    .line
+    .date {{date createdAt}}
+  if isReady
+    each documents
+      a.list-item(href="{{pathFor 'document.view' _id=_id}}")
+        .title {{title}}
+        .sub {{date createdAt}}
+    .list-item.no-doc
+      a.doc-add.btn-floating.btn-large.waves-effect.waves-light.blue(href="{{pathFor 'documents.add' topic=_id}}")
+        i.material-icons note_add
+  else 
+    .list-item.no-doc
+      +app_loading

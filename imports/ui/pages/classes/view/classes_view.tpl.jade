@@ -1,14 +1,19 @@
-h1 {{subject.title}}
-  //- TODO add chapters n stuff
-.list.chapters
-  if Template.subscriptionsReady
-    each classes
-      a(href="{{pathFor 'document.view' _id='553W'}}")
-        +document
+if Template.subscriptionsReady
+  .page-header-icon
+    +flipIcon data=icon
+    h1.title {{class.title}}
+  .list.chapters.doc-list
+    each topics
+      +topic_item
     else
       .message 
-        .title No documents there yet!
-  else
-    +app_loading
-    
-a.btn.right.waves-effect.waves-light(href="{{pathFor 'classes.add'}}") create document
+        .title No topics there yet!
+  .buttons  
+    a.btn.right.waves-effect.waves-light(href="{{pathFor 'topics.add' class=class.title}}") new topic
+
+else
+  +app_loading
+  
+  
+
+      
