@@ -28,7 +28,7 @@ Template.classes_view.helpers({
     const class_ = Classes.findOne(FlowRouter.getParam('_id'));
 
     return {
-      name: class_.title,
+      name: class_.short,
       color: class_.color,
       checked: false,
     }

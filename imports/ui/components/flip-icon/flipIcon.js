@@ -2,7 +2,7 @@ import './flipIcon.tpl.jade';
 
 Template.flipIcon.helpers({
   name() {
-    return this.data.name.substr(0,2);
+    return this.data.name.substr(0,3);
   },
   isActive() {
     return this.data.state ? "selected" : "";

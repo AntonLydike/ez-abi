@@ -7,7 +7,9 @@ Template.app_nav.onCreated(function () {
 })
 
 Template.app_nav.onRendered(() => {
-   this.$(".button-collapse").sideNav();
+   this.$(".button-collapse").sideNav({
+     closeOnClick: true
+   });
 })
 
 Template.app_nav.helpers({

@@ -3,9 +3,12 @@ form(action="javascript:void(0)").row
     h1 Add a class
   .input-field.col.s6
     label(for="name") Class name
-    input#name(type="text", name="name", required)    
+    input#name(type="text", name="name", required)
   .input-field.col.s6
     label(for="color") Class color
     input#color(type="text", name="color", required)
+  .input-field.col.s6
+    label(for="short") Class shorthand
+    input#short(type="text", name="short", required)
   .col.s12
     button.btn.waves-effect.waves-light.right(type="submit") add

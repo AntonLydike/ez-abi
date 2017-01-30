@@ -36,3 +36,4 @@ mquandalle:jade
 arillo:flow-router-helpers
 momentjs:moment
 noorderstorm:jquery.transit
+erasaur:meteor-lodash
