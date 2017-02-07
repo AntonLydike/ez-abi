@@ -7,7 +7,7 @@ const  error = function error (msg, icon, iconcolor) {  // a function to display
     icon = '<i class="material-icons left ' + iconcolor + '-text">' + icon + '</i> ';
   }
 
-  Materialize.toast(msg + icon, 6000000, 'err');
+  Materialize.toast(icon + msg, 6000000, 'err');
 },
 toast =  function toast (msg, icon, iconcolor) {  // a function to display nice messages (toasts) to the user
   if (icon === undefined) {
