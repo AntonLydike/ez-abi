@@ -23,5 +23,7 @@
 // Paragraphs:
 {
   text:  String,
-  title: String
+  title: String,
+  doc_id:String
 }
+// should have tags:[String]

@@ -9,6 +9,8 @@ import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/classes/list/list.js';
 import '../../ui/pages/classes/add/add.js';
 import '../../ui/pages/classes/view/view.js';
+import '../../ui/pages/documents/view/view.js';
+import '../../ui/pages/topics/add/add.js';
 import '../../ui/components/nav/nav.js';
 
 // Set up all routes in the app
@@ -37,6 +39,20 @@ FlowRouter.route('/classes/:_id', {
   name: 'classes.view',
   action(param) {
     BlazeLayout.render('App_body', { main: 'classes_view' });
+  },
+});
+
+FlowRouter.route('/topics/add/:class', {
+  name: 'topics.add',
+  action(param) {
+    BlazeLayout.render('App_body', { main: 'topic_add' });
+  },
+});
+
+FlowRouter.route('/documents/:_id', {
+  name: 'document.view',
+  action(param) {
+    BlazeLayout.render('App_body', { main: 'doc_view' });
   },
 });
 

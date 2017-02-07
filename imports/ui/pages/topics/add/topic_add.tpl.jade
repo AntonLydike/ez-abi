@@ -1,0 +1,15 @@
+//- TODO implement adding feature
+if Template.subscriptionsReady
+  .page-header-icon
+    +flipIcon data=icon
+    h1.title {{class.title}}
+    .sub Add topic
+  form(action="javascript:void(0)").row
+    .col.s12.input-field
+      label(for="i_title") Titel
+      input(type="text", name="title")#i_title
+    .col.s12
+      button.btn.waves-effect.waves-light.right(type="submit") add
+
+else
+  +app_loading

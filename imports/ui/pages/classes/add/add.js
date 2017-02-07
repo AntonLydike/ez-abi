@@ -15,6 +15,5 @@ Template.classes_add.events({
        }
      });
 
-     console.log('sent', name, color);
   }
 });

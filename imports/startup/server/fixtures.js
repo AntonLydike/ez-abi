@@ -32,6 +32,13 @@ Meteor.startup(() => {
       {title: 'Kapitel 2'},
       {title: 'Kapitel 3'},
       {title: 'Abschluss'},
+    ],
+    para: [
+      {title: "First paragraph", text: "lol rofl xd"},
+      {title: "Second paragraph", text: "lol rofl xd"},
+      {title: "Third paragraph", text: "lol rofl xd"},
+      {title: "Fourth paragraph", text: "lol rofl xd"},
+      {title: "Fifth paragraph", text: "lol rofl xd"},
     ]
   }
 
@@ -51,9 +58,16 @@ Meteor.startup(() => {
       _.each(data.docs, doc => {
         doc.createdAt = new Date();
         doc.topic_id = t_id;
-        doc.paragraph_count = 0;
+        doc.paragraph_count = 5;
 
-        Documents.insert(doc);
+        const doc_id = Documents.insert(doc);
+
+        _.each(data.para, (para) => {
+          para.createdAt = new Date();
+          para.doc_id = doc_id;
+
+          Paragraphs.insert(para);
+        })
       })
     })
   })

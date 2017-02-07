@@ -12,3 +12,9 @@ Meteor.publish('documents.topic', function (topic_id) {
 
   return Documents.find({topic_id});
 });
+
+Meteor.publish('documents.one', function (doc_id) {
+  check(doc_id, String);
+
+  return Documents.find(doc_id);
+});
