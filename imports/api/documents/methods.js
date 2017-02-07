@@ -10,8 +10,13 @@ Meteor.methods({
     check(topic_id, String);
     check(title, String);
 
-    if (Topics.findOne(topic_id) === undefined)
+    if (Topics.findOne(topic_id) === undefined) {
       throw new Meteor.Error("pls give me a real topic");
+    }
+
+    Topics.update(class_id, {
+      $inc: {doc_count: 1}
+    })
 
     return Documents.insert({
       title,

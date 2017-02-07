@@ -12,8 +12,12 @@ Meteor.methods({
     check(doc, String);
 
     if (Documents.findOne(doc) === undefined) {
-      throw "The referenced document does not exist!";
+      throw new Meteor.Error("The referenced document does not exist!");
     }
+
+    Documents.update(class_id, {
+      $inc: {doc_count: 1}
+    })
 
     return Links.insert({
       text,
