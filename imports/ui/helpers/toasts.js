@@ -4,10 +4,10 @@ const  error = function error (msg, icon, iconcolor) {  // a function to display
   } else {
     if (iconcolor === undefined) iconcolor = "red";
 
-    icon = '<i class="material-icons ' + iconcolor + '-text">' + icon + '</i> ';
+    icon = '<i class="material-icons left ' + iconcolor + '-text">' + icon + '</i> ';
   }
 
-  Materialize.toast(msg + icon, 6000, 'err');
+  Materialize.toast(msg + icon, 6000000, 'err');
 },
 toast =  function toast (msg, icon, iconcolor) {  // a function to display nice messages (toasts) to the user
   if (icon === undefined) {
@@ -15,10 +15,10 @@ toast =  function toast (msg, icon, iconcolor) {  // a function to display nice 
   } else {
     if (iconcolor === undefined) iconcolor = "white";
 
-    icon = '<i class="material-icons ' + iconcolor + '-text">' + icon + '</i> ';
+    icon = '<i class="material-icons left ' + iconcolor + '-text">' + icon + '</i> ';
   }
 
-  Materialize.toast(icon + msg, 6000);
+  Materialize.toast(icon + msg, 60000000);
 };
 
 export {error, toast};
