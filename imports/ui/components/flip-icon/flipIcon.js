@@ -1,5 +1,9 @@
 import './flipIcon.tpl.jade';
 
+Template.flipIcon.onCreated(function () {
+  this.data.data.name = this.data.data.name || "";
+})
+
 Template.flipIcon.helpers({
   name() {
     return this.data.name.substr(0,3);
