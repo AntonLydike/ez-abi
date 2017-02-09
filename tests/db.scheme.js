@@ -24,6 +24,7 @@
 {
   text:  String,
   title: String,
-  doc_id:String
+  doc_id:String,
+  order: Number
 }
 // should have tags:[String]

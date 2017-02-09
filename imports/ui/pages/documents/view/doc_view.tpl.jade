@@ -1,10 +1,23 @@
-//- TODO add view mode
-//- TODO add topic
-.row
-  .col.s12
-    h1 {{doc.title}}
-
-  each paragraphs
-    .col.s12
-      h3 {{title}}
-      .text-content {{{text}}}
+if Template.subscriptionsReady
+  .page-paper.z-depth-1.white
+    .page-header-icon
+      if docInfo
+        +flipIcon data=icon
+        h1.title {{docInfo.topic}}
+        .sub {{doc.title}}
+      else
+        if err
+          h3.red-text {{err}}
+        else
+          +app_loading        
+    
+    each paragraphs
+      .paragraph
+        h3.editables {{title}}
+        p.text-content.editables {{{text}}} 
+  .fixed-action-btn
+    .btn-floating.btn-large.red.waves-effect.waves-light#toggle-edit
+      i.material-icons.large mode_edit
+      i.material-icons.large remove_red_eye
+else
+  +app_loading
