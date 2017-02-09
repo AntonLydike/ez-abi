@@ -15,9 +15,14 @@ Meteor.methods({
       throw "You have to supply a valid class id";
     }
 
+    Classes.update(class_id, {
+      $inc: {topic_count: 1}
+    })
+
     return Topics.insert({
       title,
       class_id,
+      doc_count: 0,
       createdAt: new Date(),
     });
   },

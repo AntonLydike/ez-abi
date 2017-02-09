@@ -5,15 +5,16 @@ import { check } from 'meteor/check';
 import { Classes } from './classes.js';
 
 Meteor.methods({
-  'classes.insert'(title, color) {
+  'classes.insert'(title, color, short) {
     check(color, String);
     check(title, String);
+    check(short, String);
 
     return Classes.insert({
       color,
       title,
-      docCount: 0,
-      subjCount: 0,
+      short,
+      topic_count: 0,
       createdAt: new Date(),
     });
   },

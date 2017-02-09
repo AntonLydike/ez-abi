@@ -6,14 +6,10 @@ if Template.subscriptionsReady
     each topics
       +topic_item
     else
-      .message 
+      .message
         .title No topics there yet!
-  .buttons  
-    a.btn.right.waves-effect.waves-light(href="{{pathFor 'topics.add' class=class.title}}") new topic
+  .buttons
+    a.btn.right.waves-effect.waves-light(href="{{pathFor 'topics.add' class=class._id}}") new topic
 
 else
   +app_loading
-  
-  
-
-      

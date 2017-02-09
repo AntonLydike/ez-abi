@@ -1,34 +1,76 @@
 // Fill the DB with example data on startup
 
 import { Meteor } from 'meteor/meteor';
-// import { Links } from '../../api/links/links.js';
-//
-// Meteor.startup(() => {
-//   // if the Links collection is empty
-//   if (Links.find().count() === 0) {
-//     const data = [
-//       {
-//         title: 'Do the Tutorial',
-//         url: 'https://www.meteor.com/try',
-//         createdAt: new Date(),
-//       },
-//       {
-//         title: 'Follow the Guide',
-//         url: 'http://guide.meteor.com',
-//         createdAt: new Date(),
-//       },
-//       {
-//         title: 'Read the Docs',
-//         url: 'https://docs.meteor.com',
-//         createdAt: new Date(),
-//       },
-//       {
-//         title: 'Discussions',
-//         url: 'https://forums.meteor.com',
-//         createdAt: new Date(),
-//       },
-//     ];
-//
-//     data.forEach(link => Links.insert(link));
-//   }
-// });
+
+import { Documents } from '/imports/api/documents/documents.js';
+import { Paragraphs } from '/imports/api/paragraphs/paragraphs.js';
+import { Classes } from '/imports/api/classes/classes.js';
+import { Topics } from '/imports/api/topics/topics.js';
+
+Meteor.startup(() => {
+  if (Classes.find().count() > 0) {
+    return;
+  }
+
+  const data = {
+    classes: [
+      {title: 'Deutsch', short: 'de', color: 'green'},
+      {title: 'Mathe', short: 'MA', color: 'red'},
+      {title: 'Physike', short: 'ph', color: 'blue'},
+      {title: 'Sport Theorie', short: 'spt', color: 'orange'},
+    ],
+    topics: [
+      {title: 'Some Topic 1'},
+      {title: 'Some Topic 2'},
+      {title: 'Some Topic 3'},
+      {title: 'Some Topic 4'},
+      {title: 'Some Topic 5'},
+    ],
+    docs: [
+      {title: 'Einführung'},
+      {title: 'Kapitel 1'},
+      {title: 'Kapitel 2'},
+      {title: 'Kapitel 3'},
+      {title: 'Abschluss'},
+    ],
+    para: [
+      {title: "First paragraph", text: "lol rofl xd"},
+      {title: "Second paragraph", text: "lol rofl xd"},
+      {title: "Third paragraph", text: "lol rofl xd"},
+      {title: "Fourth paragraph", text: "lol rofl xd"},
+      {title: "Fifth paragraph", text: "lol rofl xd"},
+    ]
+  }
+
+  _.each(data.classes, (cl) => {
+    cl.topic_count = 5;
+    cl.createdAt = new Date();
+
+    let c_id = Classes.insert(cl);
+
+    _.each(data.topics, (topic) => {
+      topic.createdAt = new Date();
+      topic.class_id  = c_id;
+      topic.doc_count = 5;
+
+      let t_id = Topics.insert(topic);
+
+      _.each(data.docs, doc => {
+        doc.createdAt = new Date();
+        doc.topic_id = t_id;
+        doc.paragraph_count = 5;
+
+        const doc_id = Documents.insert(doc);
+
+        _.each(data.para, (para) => {
+          para.createdAt = new Date();
+          para.doc_id = doc_id;
+
+          Paragraphs.insert(para);
+        })
+      })
+    })
+  })
+
+
+});

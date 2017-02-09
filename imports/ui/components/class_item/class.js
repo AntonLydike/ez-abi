@@ -4,7 +4,7 @@ import '../flip-icon/flipIcon.js';
 Template.class_item.helpers({
   icon() {
     return {
-      name: this.title,
+      name: this.short,
       color: this.color,
       checked: false,
     }

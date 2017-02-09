@@ -4,9 +4,11 @@ import { Meteor } from 'meteor/meteor';
 import { Paragraphs } from '../paragraphs.js';
 
 Meteor.publish('paragraphs.all', function () {
-  return Links.find();
+  return Paragraphs.find();
 });
 
-Meteor.publish('paragraphs.document', function () {
-  return Links.find();
+Meteor.publish('paragraphs.doc', function (doc_id) {
+  check(doc_id, String);
+
+  return Paragraphs.find({doc_id});
 });
