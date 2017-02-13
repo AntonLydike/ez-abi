@@ -9,14 +9,14 @@ if Template.subscriptionsReady
         if err
           h3.red-text {{err}}
         else
-          +app_loading        
-    
+          +app_loading
+
     each paragraphs
       .paragraph
-        h3.editables {{title}}
-        p.text-content.editables {{{text}}} 
+        h3.editables(contenteditable="{{cont_edit}}", class="{{edit_class}}") {{title}}
+        p.editables.text-content(contenteditable="{{cont_edit}}", class="{{edit_class}}") {{{text}}}
   .fixed-action-btn
-    .btn-floating.btn-large.red.waves-effect.waves-light#toggle-edit
+    .btn-floating.btn-large.red.waves-effect.waves-light.toggle-icon#toggle-edit(class="{{btn_on}}")
       i.material-icons.large mode_edit
       i.material-icons.large remove_red_eye
 else

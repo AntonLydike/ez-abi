@@ -29,14 +29,7 @@ Template.doc_view.onRendered(function () {
   // TODO grabn from user settings
   this.edit_mode = new ReactiveVar(true);
 
-  this.autorun(() => {
-    let mode = this.edit_mode.get();
-
-    this.$('.editables')
-    .prop('contenteditable', mode)
-    .setClass('edit-on', mode);
-
-  })
+  
 })
 
 
@@ -52,6 +45,12 @@ Template.doc_view.helpers({
   docInfo() {
     return Template.instance().doc_info.get();
   },
+  cont_edit() {
+    return Template.instance().edit_mode.get();
+  },
+  edit_class() {
+    return Template.instance().edit_mode.get() ? 'edit-on' : '';
+  },
   icon() {
     let info = Template.instance().doc_info.get();
 
@@ -61,11 +60,15 @@ Template.doc_view.helpers({
       checked: false
     }
   },
+  btn_on() {
+    return Template.instance().edit_mode.get() ? 't-on' : '';
+  },
   err() {
     return Template.instance().err.get();
   },
   text() {
     // FIXME somehow the first newline has to be added manually
+    // fixed by whitespace after text?
     return this.text //+ "\n";
   }
 })
