@@ -106,9 +106,9 @@ Template.doc_view.events({
         setTimeout(() => cursor.toEnd(nextNode), 3);
       } else {
 
-        console.log(info);
+        console.log({l:info.line});
 
-        cursor.insert('\n');
+        cursor.insert('\n' + (!info.line.match(/^\n+$/) ? '\n' : ''));
       }
 
       return false;
