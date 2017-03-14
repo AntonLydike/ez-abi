@@ -29,7 +29,7 @@ Template.doc_view.onRendered(function () {
   // TODO grabn from user settings
   this.edit_mode = new ReactiveVar(true);
 
-  
+
 })
 
 
@@ -85,9 +85,19 @@ Template.doc_view.events({
   'keypress .editables'(e, tpl) {
     if (e.keyCode == 13) {
       // get node
-      let node = document.getSelection().anchorNode;
-      // pls no text nodes
-      if (node.nodeType == 3) node = node.parentNode;
+      let textNode = document.getSelection().anchorNode,
+          node = textNode.nodeType == 3 ? textNode.parentNode : textNode,
+          info;
+      // get some cursor info
+      if (node !== textNode) {
+        info = {
+          x: window.getSelection().anchorOffset,
+          y: _.indexOf(node.childNodes, textNode),
+          line: textNode.data
+        }
+        // because consistency
+        if (info.x == 0) info.y -= 1;
+      }
 
       // when cursor is in title, switch to content
       if (node.tagName == 'H3') {
@@ -95,8 +105,8 @@ Template.doc_view.events({
 
         setTimeout(() => cursor.toEnd(nextNode), 3);
       } else {
-        // otherwise insert a newline
-        console.log(e);
+
+        console.log(info);
 
         cursor.insert('\n');
       }
@@ -104,6 +114,5 @@ Template.doc_view.events({
       return false;
     }
 
-    console.log(e.keyCode);
   }
 })
