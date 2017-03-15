@@ -65,11 +65,6 @@ Template.doc_view.helpers({
   },
   err() {
     return Template.instance().err.get();
-  },
-  text() {
-    // FIXME somehow the first newline has to be added manually
-    // fixed by whitespace after text?
-    return this.text //+ "\n";
   }
 })
 
@@ -80,39 +75,105 @@ Template.doc_view.events({
   'blur .editables'(e, tpl) {
     // TODO save edits
 
-    toast("saving");
+    //toast("saving");
   },
-  'keypress .editables'(e, tpl) {
-    if (e.keyCode == 13) {
-      // get node
-      let textNode = document.getSelection().anchorNode,
-          node = textNode.nodeType == 3 ? textNode.parentNode : textNode,
-          info;
-      // get some cursor info
-      if (node !== textNode) {
-        info = {
-          x: window.getSelection().anchorOffset,
-          y: _.indexOf(node.childNodes, textNode),
-          line: textNode.data
-        }
-        // because consistency
-        if (info.x == 0) info.y -= 1;
-      }
+  'keydown .editables'(e, tpl) {
 
+    console.log("keycode:",e.keyCode);
+
+    // arrow keys: 37 38 39 40
+    //             l  u  r  d
+
+    // get info
+    let info = cursor.info();
+
+    let {node, textNode} = info;
+
+    console.log(info, e.keyCode);
+
+    switch (e.keyCode) {
+      case 13: // ENTER key - insert newlines or switch document
       // when cursor is in title, switch to content
-      if (node.tagName == 'H3') {
-        let nextNode = node.nextSibling.nextSibling;
-
-        setTimeout(() => cursor.toEnd(nextNode), 3);
+      if (info.isHeader) {
+        toThisParagraph(node);
       } else {
-
-        console.log({l:info.line});
-
-        cursor.insert('\n' + (!info.line.match(/^\n+$/) ? '\n' : ''));
+        cursor.insert('\n' + (info.line == "" ? '' : '\n'));
       }
 
       return false;
+      break;
+      case 39:  // right key
+      // if last line and last character
+      if (info.lines.length == info.y && info.x == info.line.length) {
+        return down(info, node);
+      }
+      break;
+      case 40:  // down key
+      // if last line
+      if (info.lines.length == info.y)
+        return down(info, node);
+      break;
+      case 37:  // left key
+      // if first character and first line
+      if (info.y == 1 && info.x == 0) {
+        return up(info, node);
+      }
+      break;
+      case 38:  // up key
+      // if first line
+      if (info.y == 1)
+        return up(info, node);
+      break;
     }
 
   }
 })
+
+function toNextParagraph (node) {
+  let next = $(node).closest('.paragraph').next();
+
+  // only switch if possible
+  if (next.length > 0) next.find('h3').focus();
+
+  return next.length == 0;
+}
+
+function toThisHeadline (node) {
+  let headline = $(node).closest('.paragraph').find('h3')[0];
+
+  cursor.toEnd(headline);
+
+  return false;
+}
+
+function toPrevParagraph (node) {
+  let paragraph = $(node).closest('.paragraph').prev().find('.text-content')[0];
+
+  cursor.toEnd(paragraph);
+
+  return false;
+}
+
+function toThisParagraph (node) {
+  // TODO fix wonky code
+
+  let nextNode = node.nextSibling.nextSibling;
+
+  nextNode.focus();
+}
+
+function up (info, node) {
+  if (info.isHeader) {
+    return toPrevParagraph(node);
+  } else {
+    return toThisHeadline(node);
+  }
+}
+
+function down (info, node) {
+  if (info.isHeader) {
+    return toThisParagraph(node);
+  } else {
+    return toNextParagraph(node);
+  }
+}
