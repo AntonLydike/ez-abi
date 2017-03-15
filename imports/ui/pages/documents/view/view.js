@@ -89,7 +89,7 @@ Template.doc_view.events({
 
     let {node, textNode} = info;
 
-    console.log(info, e.keyCode);
+    // console.log(info, e.keyCode);
 
     switch (e.keyCode) {
       case 13: // ENTER key - insert newlines or switch document
@@ -97,7 +97,7 @@ Template.doc_view.events({
       if (info.isHeader) {
         toThisParagraph(node);
       } else {
-        cursor.insert('\n' + (info.line == "" ? '' : '\n'));
+        cursor.insert('\n' + (info.line != "" && info.x == info.line.length? '\n' : ''));
       }
 
       return false;
@@ -133,7 +133,7 @@ function toNextParagraph (node) {
   let next = $(node).closest('.paragraph').next();
 
   // only switch if possible
-  if (next.length > 0) next.find('h3').focus();
+  if (next.length > 0) cursor.toStart(next.find('h3')[0]);
 
   return next.length == 0;
 }
@@ -149,6 +149,8 @@ function toThisHeadline (node) {
 function toPrevParagraph (node) {
   let paragraph = $(node).closest('.paragraph').prev().find('.text-content')[0];
 
+  if (paragraph === undefined) return true;
+
   cursor.toEnd(paragraph);
 
   return false;
@@ -159,7 +161,7 @@ function toThisParagraph (node) {
 
   let nextNode = node.nextSibling.nextSibling;
 
-  nextNode.focus();
+  cursor.toStart(nextNode);
 }
 
 function up (info, node) {

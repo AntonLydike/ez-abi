@@ -1,20 +1,6 @@
 const cursor = {
-  toEnd(elm) {
-    var range = document.createRange();
-    var sel = window.getSelection();
-
-    // create new textNode to set cursor in (will fail otherwise)
-    if (elm.childNodes.length == 0) elm.appendChild(document.createTextNode(""))
-
-    range.setStart(elm, 1);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    elm.focus();
-  },
-  toStart(elm) {
-    elm.focus();
-  },
+  toEnd:createCaretPlacer(false),
+  toStart:createCaretPlacer(true),
   insert(text) {
     pasteHTML(text);
   },
@@ -64,13 +50,14 @@ function cursorInfo () {
     // get all lines from the node
     let lines = node.innerHTML.split(/\n/g)
 
-    // TODO empty lines are miscounted. why is that?!
+    // TODO last line isn't counted if it's not empty and there are more than three lines?
+    // more than three lines filled or one filled, one empty and the last one filled
 
     let _childNodes = _(node.childNodes);
     let linesUntil = _childNodes
       .slice(0, _childNodes.indexOf(textNode))
       .map('data')
-      .push(textNode.data.slice(0,info.x))
+      .push(textNode.data.slice(0,info.x+1))
       .join("").split(/\n/g);
 
     // get the info
@@ -92,3 +79,23 @@ function cursorInfo () {
 }
 
 export default cursor;
+
+function createCaretPlacer(atStart) {
+    return function(el) {
+        el.focus();
+        if (typeof window.getSelection != "undefined"
+                && typeof document.createRange != "undefined") {
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            range.collapse(atStart);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        } else if (typeof document.body.createTextRange != "undefined") {
+            var textRange = document.body.createTextRange();
+            textRange.moveToElementText(el);
+            textRange.collapse(atStart);
+            textRange.select();
+        }
+    };
+}
